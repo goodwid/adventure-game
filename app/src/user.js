@@ -9,7 +9,7 @@ export default {
     let result = this.location.travel(dir);
     if (result.room) this.location = result.room;
     response = result.text;
-    if (result.obj) result.obj.forEach(item => response += (`There is a ${item.name} on the floor.\n`));
+    if (result.obj) result.obj.forEach(item => response += (`<br>There is a ${item.name} on the floor.`));
     return response;
   }
 }

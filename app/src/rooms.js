@@ -10,48 +10,47 @@ export default class Room {
     if (!this[dir]) {
       response.text = 'Sorry, you cannot go that way';
     } else {
-      response.text = `You travel ${dir} to the ${this[dir].title}\n`;
-      response.text += this[dir].desc;
+      response.text = this[dir].desc;
       if (this[dir].obj.length > 0) response.obj = this[dir].obj;
     }
     return response;
   }
   look () {
     let response = ''
-    response += `You are in the ${this.title}.  ${this.desc}\n`;
-    if (this.obj.length > 0) this.obj.forEach(item => response += (`There is a ${item.name} on the floor.\n`));
+    response += `You are in the ${this.title}.  ${this.desc}`;
+    if (this.obj.length > 0) this.obj.forEach(item => response += (`<br>There is a ${item.name} on the floor.`));
     return response;
   }
 }
 
 Room.closet = new Room({
   title: 'closet',
-  desc: 'It\'s dark and there are spiders.  There is nothing to see here.\n'
+  desc: 'It\'s dark and there are spiders.  There is nothing to see here.'
 })
 
 Room.study = new Room({
   title: 'study',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.\n',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
 });
 
 Room.den = new Room({
   title: 'den',
-  desc: 'Bookshelves line the room.  There is a door to the south.\n',
+  desc: 'Bookshelves line the room.  There is a door to the south.',
 });
 
 Room.hallwayNorth = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  There is a door to the north and the hallway continues south.\n',
+  desc: 'You are in a long hallway.  There is a door to the north and the hallway continues south.',
 });
 
 Room.hallwayMiddle = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  It continues to the north and south.\n',
+  desc: 'You are in a long hallway.  It continues to the north and south.',
 });
 
 Room.hallwaySouth = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  There is a door to the south and the hallway continues north.\n',
+  desc: 'You are in a long hallway.  There is a door to the south and the hallway continues north.',
 });
 
 

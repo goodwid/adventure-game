@@ -4,7 +4,12 @@ import user from './user';
 
 export default (c) => {
   let response = {};
+  response.status = {};
+  response.validCommand = true;
   let cmd = c.split(' ');
+  response.cmd = cmd[0];
+  response.status.location = user.location.title;
+  response.status.inventory = user.inventory;
   let itemName = cmd[1];
   switch (cmd[0]) {
     case 'north':
@@ -79,8 +84,14 @@ export default (c) => {
       console.log('user: ', user);
       break;
     }
+    case 'credits': {
+      response.text = 'Created by Johnny Luangphasy and David Goodwin, 2016.  MIT license.';
+      break;
+    }
+
 
     default: {
+      response.validCommand = false;
       response.text = '';
     }
   }

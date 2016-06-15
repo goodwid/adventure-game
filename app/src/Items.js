@@ -1,4 +1,5 @@
 import Room from './rooms';
+import user from './user';
 
 export default class Item {
   constructor (obj) {
@@ -23,6 +24,16 @@ Item.key = new Item({
   action() {
     Room.study.w = Room.closet;
     Room.closet.e = Room.study;
-    return 'You unlock the closet door to the west.'
+    return 'You unlock the closet door to the west.';
   }
 });
+
+Item.card = new Item({
+  name: 'card',
+  startRoom: Room.closet,
+  useRoom: Room.den,
+  action() {
+    user.location = Room.closet;
+    return 'Rainbows fill the room.  You feel woozy.';
+  }
+})
