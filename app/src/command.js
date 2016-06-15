@@ -8,8 +8,6 @@ export default (c) => {
   response.validCommand = true;
   let cmd = c.split(' ');
   response.cmd = cmd[0];
-  response.status.location = user.location.title;
-  response.status.inventory = user.inventory;
   let itemName = cmd[1];
   switch (cmd[0]) {
     case 'north':
@@ -95,5 +93,7 @@ export default (c) => {
       response.text = '';
     }
   }
+  response.status.location = user.location.title;
+  response.status.inventory = user.inventory;
   return response;
 }

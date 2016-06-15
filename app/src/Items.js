@@ -6,7 +6,7 @@ export default class Item {
     Object.keys(obj).forEach(function(prop){
       this[prop] = obj[prop];
     }, this);
-    this.startRoom.obj.push(this);
+    if (this.startRoom) this.startRoom.obj.push(this);
   }
   use () {
     let response = {};
@@ -24,7 +24,9 @@ Item.key = new Item({
   action() {
     Room.study.w = Room.closet;
     Room.closet.e = Room.study;
-    return 'You unlock the closet door to the west.';
+    let itemIndex = user.inventory.findIndex(item => item.name === this.name);
+    user.inventory.splice(itemIndex,1);
+    return 'You unlock the closet door to the west.  The key is stuck in the lock.';
   }
 });
 
@@ -36,4 +38,12 @@ Item.card = new Item({
     user.location = Room.closet;
     return 'Rainbows fill the room.  You feel woozy.';
   }
-})
+});
+
+Item.ring = new Item({
+  name: 'ring',
+  useRoom: Room.hallwayMiddle,
+  action() {
+    return 'Ow!';
+  }
+});

@@ -1,9 +1,12 @@
+import Item from './Items';
+
 export default class Room {
   constructor (obj) {
     Object.keys(obj).forEach(function(prop){
       this[prop] = obj[prop];
     }, this);
     this.obj = [];
+    this.count = 0;
   }
   travel (dir) {
     let response = {room: this[dir]};
@@ -25,7 +28,14 @@ export default class Room {
 
 Room.closet = new Room({
   title: 'closet',
-  desc: 'It\'s dark and there are spiders.  There is nothing to see here.'
+  desc: 'It\'s dark and there are spiders.  Scratched on the wall you see _ _ 3.',
+  trigger() {
+    if (this.count === 3) {
+      this.obj.push(Item.ring);
+      return '<br>Something falls off a high shelf.';
+    }
+    return '';
+  }
 })
 
 Room.study = new Room({

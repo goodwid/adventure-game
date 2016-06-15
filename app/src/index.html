@@ -25,7 +25,11 @@
           </div>
           <div>
             Current Location: <span>{{location}}</span>
-            Objects in Inventory: <ul><li ng-repeat="item in inventory">{{item}}</li></ul>
+            <span ng-if="inventory">Objects in Inventory:</span>
+            <span ng-if="inventory == ''">No items in Inventory.</span>
+            <ul>
+              <li ng-if="inventory" ng-repeat="item in inventory">{{item.name}}</li>
+            </ul>
           </div>
         </div>
       </main>
