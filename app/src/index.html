@@ -13,10 +13,15 @@
       </header>
       <main>
         <div ng-controller="cli">
-          <ul class="list-unstyled" id="cli"></ul>
+          <ul class="list-unstyled">
+            <li ng-repeat="outputItem in outputList">
+              <span class="color--cyan" ng-if="outputItem.validCommand">$</span>
+              <span>{{outputItem.text}}</span>
+            </li>
+          </ul>
           <div class="input-group">
             <span class="input-group-addon input-group-addon--cli color--cyan" id="addon">$&nbsp;</span>
-            <input type="text" class="form-control form-control--cli" aria-describedby="addon" ng-keypress="onKeypress($event)">
+            <input type="text" class="form-control form-control--cli" aria-describedby="addon" ng-keypress="addOutputItem($event)" ng-model="inputText">
           </div>
         </div>
       </main>
