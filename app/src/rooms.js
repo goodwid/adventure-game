@@ -118,6 +118,7 @@ user = {
 function command(c) {
   let response = {};
   let cmd = c.toLowerCase().trim().split(' ');
+  let itemName = cmd[1];
   switch (cmd[0]) {
     case 'north':
     case 'south':
@@ -136,13 +137,11 @@ function command(c) {
       break;
     }
     case 'get': {
-      let itemName = cmd[1];
       if (user.location.obj.length === 0) {
         response.msg = `There is no ${itemName || 'item'} here to get`;
         break;
       }
       let itemIndex = user.location.obj.findIndex(item => item.name === itemName);
-      console.log('itemIndex: ', itemIndex);
       if (itemIndex > -1) {
         item = user.location.obj[itemIndex];
         response.msg = `You picked up a ${item.name}.`;
@@ -152,15 +151,14 @@ function command(c) {
       break;
     }
     case 'drop': {
-      let itemName = cmd[1];
       if (cmd[1] === 'all' && user.inventory.length > 0) {
         user.inventory.forEach(item => user.location.obj.push(item));
         user.inventory = [];
         response.msg = 'You have dropped all items.';
         break;
       }
-      let itemIndex = user.inventory.findIndex(itemName)
-      if ( itemIndex > -1) {
+      let itemIndex = user.inventory.findIndex(item => item.name === itemName);
+      if (itemIndex > -1) {
         item = user.inventory[itemIndex];
         response.msg = `You have dropped a ${item.name}`;
         user.location.obj.push(item);
@@ -171,14 +169,34 @@ function command(c) {
     case 'inv':
     case 'inventory':
     case 'i': {
-      if (user.inventory !== []) {
-        console.log('You have the following items:');
-        user.inventory.forEach(item => console.log(`  ${item.name}`));
-      } else console.log('You have nothing.');
+      if (user.inventory.length > 0) {
+        response.msg = 'You have the following items:\n';
+        user.inventory.forEach(item => response.msg += `  ${item.name}\n`);
+      } else response.msg = 'You have nothing.';
+      break;
+    }
+    case 'u':
+    case 'use': {
+      let itemIndex = user.inventory.findIndex(item => item.name === itemName);
+      if (itemIndex > -1) {
+        let item = user.inventory[itemIndex];
+        if (item.useRoom === user.location) {
+          response.msg = item.action();
+        } else {
+          response.msg = 'You cannot use that here.';
+        }
+      } else response.msg = 'You do not have that item.';
+      break;
+    }
+    case 'diag': {
+      console.log('user: ', user);
       break;
     }
     case 'quit':
     case 'q': process.exit(0);
+    default: {
+      response.msg = '';
+    }
   }
   return response;
 }
@@ -188,10 +206,11 @@ function prompt() {
   process.stdout.write('> ');
 }
 process.stdin.on('data', text =>  {
-  result = command(text.toString());
+  let result = command(text.toString());
   console.log(result.msg);
   prompt();
 });
 
 buildMap();
+console.log(user.location.look());
 prompt();
