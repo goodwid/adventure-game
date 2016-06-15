@@ -2,8 +2,24 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Adventure Game</title>
+    <link href="//fonts.googleapis.com/css?family=Inconsolata:400" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   </head>
-  <body>
+  <body ng-app="app" ng-cloak>
+    <div class="container-fluid">
+      <header>
+        <h1>Adventure Game</h1>
+      </header>
+      <main>
+        <div ng-controller="cli">
+          <ul class="list-unstyled" id="cli"></ul>
+          <div class="input-group">
+            <span class="input-group-addon input-group-addon--cli color--cyan" id="addon">$&nbsp;</span>
+            <input type="text" class="form-control form-control--cli" aria-describedby="addon" ng-keypress="onKeypress($event)">
+          </div>
+        </div>
+      </main>
+    </div>
   </body>
 </html>
