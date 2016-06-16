@@ -40,7 +40,7 @@ Room.closet = new Room({
 
 Room.kitchen = new Room({
   title: 'kitchen',
-  desc: 'Kitchen',
+  desc: 'There are cabinets and a stove here.  You smell something familiar but you can\'t place it.  There is a door to the garage in the north, and the den to the south, and an exit to the hallway east.',
 });
 
 Room.dining = new Room({
@@ -70,42 +70,42 @@ Room.office = new Room({
 
 Room.garage = new Room({
   title: 'garage',
-  desc: 'There is a workbench here.  There is a door to the south.',
+  desc: 'There is a workbench here.  YOu can return to the kitchen through the door to the south.',
 });
 
 Room.master = new Room({
   title: 'master bedroom',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'There is a large bed here.  There is a closet to the north, and a door to the hallway to the west.',
 });
 
 Room.smallBedroom = new Room({
   title: 'small bedroom',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'There is a bed here, and a nightstand.  There is a door to the east.',
 });
 
 Room.largeBedroom = new Room({
   title: 'large bedroom',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'There is a bed here, and a nightstand.  There is a door to the east.',
 });
 
 Room.den = new Room({
   title: 'den',
-  desc: 'Bookshelves line the room.  There is a door to the south.',
+  desc: 'Bookshelves line the room.  There is a door to the foyer in the east, and the kitchen in the north.<br>There is a locked door to the east',
 });
 
 Room.hallwayNorth = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  There is a door to the north and the hallway continues south.',
+  desc: 'You are in a long hallway.  There are doors to the east and west and the hallway continues south.',
 });
 
 Room.hallwayMiddle = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  It continues to the north and south.',
+  desc: 'You are in a long hallway.  It continues to the north and south, with exits to the east and west.',
 });
 
 Room.hallwaySouth = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  There is a door to the south and the hallway continues north.',
+  desc: 'You are in a long hallway.  There are doors to the south and west and the hallway continues north.',
 });
 
 
