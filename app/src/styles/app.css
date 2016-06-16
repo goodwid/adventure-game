@@ -1,3 +1,8 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background-color: #353b3b;
   color: #fff;
@@ -5,6 +10,33 @@ body {
   font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
+  padding-top: 100px;
+  padding-bottom: 120px;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 79px;
+  border-bottom: 1px solid #999;
+  z-index: 5;
+  background-color: #353b3b;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid #999;
+  line-height: 50px;
+  z-index: 5;
+  background-color: #353b3b;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #86d6f1;
 }
 
 button, select, html, textarea, input {
@@ -41,5 +73,45 @@ ul {
 }
 
 .color--cyan {
-  color: #00c5c7;
+  color: #78a9a9;
+}
+
+.color--green {
+  color: #cdea9e;
+}
+
+.color--grey {
+  color: #cfd2da;
+}
+
+.color--red {
+  color: #f1787e;
+}
+
+.color--yellow {
+  color: #f9eda5;
+}
+
+.list--commas {
+  padding-left: 0px;
+  list-style: none;
+}
+
+.list--commas > li:before {
+  content: ', ';
+}
+
+.list--commas > li:first-child:before {
+  content: '\00a0';
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 70px;
+  }
+
+  footer {
+    height: 50px;
+    line-height: 50px;
+  }
 }

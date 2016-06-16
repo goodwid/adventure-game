@@ -7,48 +7,60 @@ import ngSanitize from 'angular-sanitize';
 
 angular
   .module('app', [ngSanitize])
-  .controller('cli', ($scope, $filter) => {
-    $scope.outputList = [];
-    let response = command('l');
-    let outputItem = {
-      text: response.text,
-      validCommand: false
-    }
-    $scope.location = response.status.location;
-    $scope.outputList.push(outputItem);
-    $scope.inventory = '';
-    $scope.addOutputItem = ($event) => {
-      let keyCode = $event.which || $event.keyCode;
-
-      if (keyCode === 13) {
-        let inputText = $filter('lowercase')($scope.inputText);
-        let response = command(inputText);
-        $scope.location = response.status.location;
-        $scope.inventory = '';
-        if (response.status.inventory.length > 0) {
-          $scope.inventory = response.status.inventory;
-        }
-
-        let outputItem = {
-          text: response.text,
-          validCommand: false
-        }
-        let inputItem = {
-          text: inputText,
-          validCommand: response.validCommand
-        };
-        $scope.outputList.push(inputItem);
-        $scope.outputList.push(outputItem);
-
-        if ($scope.outputList.length > 16) {
-          $scope.outputList.shift();
-          $scope.outputList.shift();
-        }
-
-        $scope.inputText = '';
+  .controller('cli', [
+    '$scope', '$filter', '$window', '$document',
+    ($scope, $filter, $window, $document) => {
+      $scope.outputList = [];
+      let response = command('l');
+      let outputItem = {
+        text: response.text,
+        validCommand: false
       }
-    };
-  })
-  .controller('status',($scope) => {
 
-  })
+      $scope.location = response.status.location;
+      $scope.outputList.push(outputItem);
+      $scope.inventory = '';
+
+      $scope.addOutputItem = ($event) => {
+        let keyCode = $event.which || $event.keyCode;
+
+        if (keyCode === 13) {
+          let inputText = $filter('lowercase')($scope.inputText);
+          let response = command(inputText);
+          let inputItem = {
+            text: inputText,
+            validCommand: response.validCommand
+          };
+
+          outputItem = {
+            text: response.text,
+            validCommand: false
+          }
+
+          $scope.location = response.status.location;
+          $scope.inventory = '';
+
+          if (response.status.inventory.length > 0) {
+            $scope.inventory = response.status.inventory;
+          }
+
+          $scope.outputList.push(inputItem);
+
+          if (response.validCommand === true) {
+            $scope.outputList.push(outputItem);
+          }
+
+          // if ($scope.outputList.length > 16) {
+          //   $scope.outputList.shift();
+          //   $scope.outputList.shift();
+          // }
+
+          setTimeout(() => {
+            $window.scrollTo(0, $document[0].body.scrollHeight);
+          }, 100);
+
+          $scope.inputText = '';
+        }
+      };
+    }
+  ]);

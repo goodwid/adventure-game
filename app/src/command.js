@@ -4,11 +4,11 @@ import user from './user';
 
 export default (c) => {
   let response = {};
+  let cmd = c ? c.split(' ') : '';
+  let itemName = cmd[1];
   response.status = {};
   response.validCommand = true;
-  let cmd = c.split(' ');
   response.cmd = cmd[0];
-  let itemName = cmd[1];
   switch (cmd[0]) {
     case 'north':
     case 'south':
@@ -89,7 +89,7 @@ export default (c) => {
 
 
     default: {
-      response.validCommand = false;
+      // response.validCommand = true;
       response.text = '';
     }
   }
