@@ -2,7 +2,7 @@ import Item from './Items';
 import Room from './rooms';
 
 export default {
-  location: Room.study,
+  location: Room.master,
   inventory: [],
   go (dir) {
     let response = '';
