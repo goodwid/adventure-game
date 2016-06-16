@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html ng-app="app" ng-controller="page" ng-click="focusCliInput()">
+<html ng-app="app" ng-controller="page" ng-click="focusCliInput($event)">
   <head>
     <meta charset="utf-8">
     <title>Adventure Game</title>
     <link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <div ng-controller="cli">
       <header>
         <div class="container-fluid">
-          <h1 class="text-uppercase">Adventure Game</h1>
+          <h1 class="text-uppercase pull-left">Adventure Game</h1>
+          <button type="button" class="btn btn--help pull-right" data-toggle="modal" data-target="#modal-help">
+            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+          </button>
         </div>
       </header>
       <main>
@@ -49,5 +52,18 @@
         </div>
       </footer>
     </div>
+
+    <div class="modal" id="modal-help" tabindex="-1" role="dialog" aria-labelledby="modal-help-label">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h2 class="modal-title h1" id="modal-help-label">Modal title</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="//cdn.jsdelivr.net/g/jquery@1.12.4,bootstrap@3.3.6"></script>
   </body>
 </html>
