@@ -40,37 +40,37 @@ Room.closet = new Room({
 
 Room.kitchen = new Room({
   title: 'kitchen',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'Kitchen',
 });
 
 Room.dining = new Room({
   title: 'dining room',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'There are a table and chairs here.',
 });
 
 Room.patio = new Room({
   title: 'patio',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'You are in a fenced off patio.  There seems to be no way out except to go back inside.',
 });
 
 Room.foyer = new Room({
   title: 'foyer',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'There is a front door to the south but you see a monster blocking the pathway.',
 });
 
 Room.living = new Room({
   title: 'livingroom',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'There is a comfy sofa here and some end tables.',
 });
 
 Room.office = new Room({
   title: 'office',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'There is a desk here.',
 });
 
 Room.garage = new Room({
   title: 'garage',
-  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+  desc: 'There is a workbench here.  There is a door to the south.',
 });
 
 Room.master = new Room({
@@ -122,21 +122,21 @@ Room.buildMap = () => {
     room1[dir] = room2;
     room2[opposite(dir)] = room1;
   }
-  connect(foyer, 'n', hallwaySouth);
-  connect(hallwaySouth, 'n', hallwayMiddle);
-  connect(hallwayMiddle, 'e', dining);
-  connect(hallwayMiddle, 'w', kitchen);
-  connect(kitchen, 'n', garage);
-  connect(kitchen, 's', den);
-  connect(den, 'e', foyer);
-  connect(foyer, 'e', living);
-  connect(living, 'n', dining);
-  connect(living, 'e', patio);
-  connect(hallwaySouth, 'w', smallBedroom);
-  connect(hallwayMiddle, 'n', hallwayNorth);
-  connect(hallwayNorth, 'w', largeBedroom);
-  connect(hallwayNorth, 'e', master);
-  connect(master, 'n', closet);
+  connect(Room.foyer, 'n', Room.hallwaySouth);
+  connect(Room.hallwaySouth, 'n', Room.hallwayMiddle);
+  connect(Room.hallwayMiddle, 'e', Room.dining);
+  connect(Room.hallwayMiddle, 'w', Room.kitchen);
+  connect(Room.kitchen, 'n', Room.garage);
+  connect(Room.kitchen, 's', Room.den);
+  connect(Room.den, 'e', Room.foyer);
+  connect(Room.foyer, 'e', Room.living);
+  connect(Room.living, 'n', Room.dining);
+  connect(Room.living, 'e', Room.patio);
+  connect(Room.hallwaySouth, 'w', Room.smallBedroom);
+  connect(Room.hallwayMiddle, 'n', Room.hallwayNorth);
+  connect(Room.hallwayNorth, 'w', Room.largeBedroom);
+  connect(Room.hallwayNorth, 'e',Room.master);
+  connect(Room.master, 'n', Room.closet);
 
 }
 
