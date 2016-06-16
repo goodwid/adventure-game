@@ -38,8 +38,53 @@ Room.closet = new Room({
   }
 })
 
-Room.study = new Room({
-  title: 'study',
+Room.kitchen = new Room({
+  title: 'kitchen',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.dining = new Room({
+  title: 'dining room',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.patio = new Room({
+  title: 'patio',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.foyer = new Room({
+  title: 'foyer',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.living = new Room({
+  title: 'livingroom',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.office = new Room({
+  title: 'office',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.garage = new Room({
+  title: 'garage',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.master = new Room({
+  title: 'master bedroom',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.smallBedroom = new Room({
+  title: 'small bedroom',
+  desc: 'There is a desk here.  There is a door to the north, and a closet.',
+});
+
+Room.largeBedroom = new Room({
+  title: 'large bedroom',
   desc: 'There is a desk here.  There is a door to the north, and a closet.',
 });
 
@@ -77,10 +122,22 @@ Room.buildMap = () => {
     room1[dir] = room2;
     room2[opposite(dir)] = room1;
   }
-  connect(Room.study, 'n', Room.hallwaySouth);
-  connect(Room.hallwaySouth, 'n', Room.hallwayMiddle);
-  connect(Room.hallwayMiddle, 'n', Room.hallwayNorth);
-  connect(Room.den, 's', Room.hallwayNorth);
+  connect(foyer, 'n', hallwaySouth);
+  connect(hallwaySouth, 'n', hallwayMiddle);
+  connect(hallwayMiddle, 'e', dining);
+  connect(hallwayMiddle, 'w', kitchen);
+  connect(kitchen, 'n', garage);
+  connect(kitchen, 's', den);
+  connect(den, 'e', foyer);
+  connect(foyer, 'e', living);
+  connect(living, 'n', dining);
+  connect(living, 'e', patio);
+  connect(hallwaySouth, 'w', smallBedroom);
+  connect(hallwayMiddle, 'n', hallwayNorth);
+  connect(hallwayNorth, 'w', largeBedroom);
+  connect(hallwayNorth, 'e', master);
+  connect(master, 'n', closet);
+
 }
 
 Room.buildMap();
