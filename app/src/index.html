@@ -17,7 +17,7 @@
         <div class="container-fluid">
           <ul class="list-unstyled">
             <li ng-repeat="outputItem in outputList">
-              <span class="color--cyan" ng-if="outputItem.validCommand">&gt;</span>
+              <span class="color--cyan" ng-if="outputItem.command">&gt;</span>
               <span ng-bind-html="outputItem.text"></span>
             </li>
           </ul>

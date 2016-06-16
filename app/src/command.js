@@ -5,8 +5,6 @@ export default (c) => {
   let cmd = c ? c.split(' ') : '';
   let itemName = cmd[1];
   response.status = {};
-  response.validCommand = true;
-  response.cmd = cmd[0];
   switch (cmd[0]) {
     case 'north':
     case 'south':

@@ -28,7 +28,7 @@ Room.closet = new Room({
   title: 'closet',
   desc: 'It\'s dark and there are spiders.  Ew.  There are some vintage clothes on the rod and a high shelf.',
   trigger() {
-    if (this.count === 3) {
+    if (this.count === 2) {
       this.obj.push(Item.ring);
       return '<br>Something falls off a high shelf.';
     }
@@ -38,12 +38,12 @@ Room.closet = new Room({
 
 Room.kitchen = new Room({
   title: 'kitchen',
-  desc: 'There are cabinets and a stove here.  You smell something familiar but you can\'t place it.  There is a door to the garage in the north, and the den to the south, and an exit to the hallway east.'
+  desc: 'This appears to be a kitchen.  There are cabinets and a stove here.  You smell something familiar but you can\'t place it.  There is a door to the garage in the north, and the den to the south, and an exit to the hallway east.'
 });
 
 Room.dining = new Room({
   title: 'dining room',
-  desc: 'There are a table and chairs here.'
+  desc: 'You are in the dining room.  There are a table and chairs here.  The living room is south, and you can enter the hallway to the west.'
 });
 
 Room.patio = new Room({
@@ -53,10 +53,10 @@ Room.patio = new Room({
 
 Room.foyer = new Room({
   title: 'foyer',
-  desc: 'There is a front door to the south but you see a monster blocking the pathway.',
+  desc: 'There is a front door to the south and doors east and west but you see a monster blocking the pathway!',
   trigger() {
     user.location = Room.living;
-    return 'The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.'
+    return '<br><br>BAM!<br><br>The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.<br>There is a comfy sofa here and some end tables.  The foyer is to the west, and the dining room is north.'
   }
 });
 
@@ -67,32 +67,32 @@ Room.living = new Room({
 
 Room.garage = new Room({
   title: 'garage',
-  desc: 'There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET"  You can return to the kitchen through the door to the south.'
+  desc: 'You are in the garage.  There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET"  You can return to the kitchen through the door to the south.'
 });
 
 Room.master = new Room({
   title: 'master bedroom',
-  desc: 'There is a large bed here.  There is a locked closet to the north, and a door to the hallway to the west.'
+  desc: 'You are in the master bedroom.  There is a large bed here, and a chair.  There is a locked closet to the north, and a door to the hallway to the west.'
 });
 
 Room.smallBedroom = new Room({
   title: 'small bedroom',
-  desc: 'There is a bed here, and a nightstand.  On the nightstand is a note that reads: "The ring is dangerous!"  There is a door to the east.'
+  desc: 'You\'re in the smaller bedroom.  There is a bed here, and a nightstand.  On the nightstand is a note that reads: "The ring is dangerous!"  There is a door to the east.'
 });
 
 Room.largeBedroom = new Room({
   title: 'large bedroom',
-  desc: 'There is a bed here, and a nightstand.  There is a door to the east.'
+  desc: 'This is the larger bedroom.  There is a bed here, and a nightstand.  There is a door to the east.'
 });
 
 Room.den = new Room({
   title: 'den',
-  desc: 'Bookshelves line the room.  On a small table, there is a printer with a USB slot.  There is a door to the foyer in the east, and the kitchen in the north.'
+  desc: 'You\'re in the den.  Bookshelves line the room.  There is a recliner and a side table facing a small television.  On a small table in the corner, there is a printer with a USB slot.  There is a door to the foyer in the east, and the kitchen in the north.'
 });
 
 Room.hallwayNorth = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  There are doors to the east and west and the hallway continues south.'
+  desc: 'You are at the north end of a long hallway.  There are doors to the east and west and the hallway continues south.'
 });
 
 Room.hallwayMiddle = new Room({
@@ -102,7 +102,7 @@ Room.hallwayMiddle = new Room({
 
 Room.hallwaySouth = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  There are doors to the south and west and the hallway continues north.'
+  desc: 'You are at the south end of a long hallway.  There are doors to the south and west and the hallway continues north.'
 });
 
 Room.exit = new Room({
@@ -138,8 +138,6 @@ Room.buildMap = () => {
   connect(Room.hallwayMiddle, 'n', Room.hallwayNorth);
   connect(Room.hallwayNorth, 'w', Room.largeBedroom);
   connect(Room.hallwayNorth, 'e',Room.master);
-  // connect(Room.master, 'n', Room.closet);
-
 }
 
 Room.buildMap();
