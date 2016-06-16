@@ -35,7 +35,7 @@ footer {
   background-color: #353b3b;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   color: #86d6f1;
   font-weight: 700;
 }
@@ -46,6 +46,23 @@ button, select, html, textarea, input {
 
 ul {
   margin-bottom: 0;
+}
+
+.modal--cli .modal-dialog {
+  width: auto;
+  margin: 0;
+}
+
+.modal--cli .modal-content {
+  background-color: #353b3b;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+}
+
+.modal--cli .modal-header {
+  border-bottom: 1px solid #999;
+  padding: 14px 15px 13px 15px;
 }
 
 .btn--help {

@@ -52,18 +52,21 @@
         </div>
       </footer>
     </div>
-
-    <div class="modal" id="modal-help" tabindex="-1" role="dialog" aria-labelledby="modal-help-label">
+    <div class="modal modal--cli" id="modal-help" tabindex="-1" role="dialog" aria-labelledby="modal-help-label">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-body">
+          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h2 class="modal-title h1" id="modal-help-label">Modal title</h4>
+            <h2 class="modal-title h1 text-uppercase" id="modal-help-label">Help</h2>
+          </div>
+          <div class="modal-body">
+            <ul class="list-unstyled">
+              <li ng-repeat="(cmdKey, cmdDescription) in help">{{cmdKey}} - {{cmdDescription}}</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
-
     <script src="//cdn.jsdelivr.net/g/jquery@1.12.4,bootstrap@3.3.6"></script>
   </body>
 </html>

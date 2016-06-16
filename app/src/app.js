@@ -3,13 +3,15 @@ import './styles/app.css';
 import command from './command';
 import angular from 'angular';
 import ngSanitize from 'angular-sanitize';
-// import commands from './cli';
+import help from './help';
 
 angular
   .module('app', [ngSanitize])
   .controller('page', [
     '$scope', '$document',
     ($scope, $document) => {
+      $scope.help = help;
+
       $scope.focusCliInput = ($event) => {
         if ($event.target.className !== 'glyphicon glyphicon-question-sign') {
           $document.find('input')[0].focus();
@@ -36,7 +38,6 @@ angular
           response = command(inputText);
           if (response.help) {
             $('#modal-help').modal('show');
-            console.log('help triggered');
           }
           let inputItem = {
             text: inputText,
