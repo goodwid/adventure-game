@@ -1,6 +1,4 @@
-import Item from './Items';
-import Room from './rooms';
-import user from './user';
+import {Room, Item, user} from './game';
 
 export default (c) => {
   let response = {};
@@ -85,6 +83,10 @@ export default (c) => {
     case 'credits': {
       response.text = 'Created by Johnny Luangphasy and David Goodwin, 2016.  MIT license.';
       break;
+    }
+    case 'help':
+    case 'h': {
+      response.help = true;
     }
 
 
