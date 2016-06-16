@@ -3,36 +3,51 @@
   <head>
     <meta charset="utf-8">
     <title>Adventure Game</title>
-    <link href="//fonts.googleapis.com/css?family=Inconsolata:400" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   </head>
-  <body ng-app="app" ng-cloak>
-    <div class="container-fluid">
+  <body ng-app="app">
+    <div ng-controller="cli">
       <header>
-        <h1>Adventure Game</h1>
+        <div class="container-fluid">
+          <h1 class="text-uppercase">Adventure Game</h1>
+        </div>
       </header>
       <main>
-        <div ng-controller="cli">
+        <div class="container-fluid">
           <ul class="list-unstyled">
             <li ng-repeat="outputItem in outputList">
               <span class="color--cyan" ng-if="outputItem.validCommand">&gt;</span>
               <span ng-bind-html="outputItem.text"></span>
             </li>
           </ul>
-          <div class="input-group">
+          <div class="input-group input-group--cli">
             <span class="input-group-addon input-group-addon--cli color--cyan" id="addon">&gt;&nbsp;</span>
             <input type="text" class="form-control form-control--cli" aria-describedby="addon" ng-keypress="addOutputItem($event)" ng-model="inputText">
           </div>
-          <div>
-            Current Location: <span>{{location}}</span>
-            <span ng-if="inventory">Objects in Inventory:</span>
-            <span ng-if="inventory == ''">No items in Inventory.</span>
-            <ul>
-              <li ng-if="inventory" ng-repeat="item in inventory">{{item.name}}</li>
-            </ul>
-          </div>
         </div>
       </main>
+      <footer>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 color--green">
+              <small>
+                <b>Current Location</b>:
+                <span>{{location}}</span>
+              </small>
+            </div>
+            <div class="col-xs-12 col-sm-6 color--yellow">
+              <small ng-class="{'pull-left': inventory}">
+                <b>Items in Inventory</b>:
+                <span ng-if="inventory == ''">none</span>
+              </small>
+              <ul class="list--commas small" ng-if="inventory">
+                <li class="pull-left" ng-repeat="item in inventory">{{item.name}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   </body>
 </html>
