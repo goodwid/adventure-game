@@ -10,9 +10,10 @@ angular
   .controller('page', [
     '$scope', '$document',
     ($scope, $document) => {
-      $scope.focusCliInput = () => {
-        console.log();
-        $document.find('input')[0].focus();
+      $scope.focusCliInput = ($event) => {
+        if ($event.target.className !== 'glyphicon glyphicon-question-sign') {
+          $document.find('input')[0].focus();
+        }
       };
     }
   ])
@@ -39,7 +40,7 @@ angular
           let response = command(inputText);
 
           if (response.help) {
-            //showHelp();
+            $('#modal-help').modal('show');
             console.log('help triggered');
           }
           let inputItem = {

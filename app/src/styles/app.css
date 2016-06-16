@@ -48,6 +48,18 @@ ul {
   margin-bottom: 0;
 }
 
+.btn--help {
+  background-color: transparent;
+  padding: 6px;
+  line-height: normal;
+  margin-top: 19px;
+}
+
+.glyphicon {
+  font-size: 24px;
+  color: #fff;
+}
+
 .input-group-addon--cli {
   font-size: 20px;
   padding: 0;
