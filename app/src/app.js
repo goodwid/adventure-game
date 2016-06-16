@@ -7,6 +7,15 @@ import ngSanitize from 'angular-sanitize';
 
 angular
   .module('app', [ngSanitize])
+  .controller('page', [
+    '$scope', '$document',
+    ($scope, $document) => {
+      $scope.focusCliInput = () => {
+        console.log();
+        $document.find('input')[0].focus();
+      };
+    }
+  ])
   .controller('cli', [
     '$scope', '$filter', '$window', '$document',
     ($scope, $filter, $window, $document) => {
