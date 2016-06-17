@@ -35,6 +35,15 @@ footer {
   background-color: #353b3b;
 }
 
+footer:before {
+  content: '';
+  position: absolute;
+  top: -16px;
+  width: 100%;
+  height: 15px;
+  background-color: #353b3b;
+}
+
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   color: #86d6f1;
   font-weight: 700;
@@ -48,16 +57,43 @@ ul {
   margin-bottom: 0;
 }
 
+button.close.btn--glyphicon,
+.btn--glyphicon {
+  background-color: transparent;
+  padding: 6px;
+  line-height: normal;
+  margin-top: 19px;
+}
+
+.dl--help dt {
+  font-weight: 400;
+}
+
+.dl--help dd {
+  margin-bottom: 10px;
+}
+
+.glyphicon {
+  font-size: 24px;
+  color: #fff;
+}
+
+.modal--cli {
+  background-color: #353b3b;
+}
+
 .modal--cli .modal-dialog {
   width: auto;
   margin: 0;
+  height: 100%;
 }
 
 .modal--cli .modal-content {
-  background-color: #353b3b;
+  background-color: transparent;
   box-shadow: none;
   border-radius: 0;
   border: none;
+  height: 100%;
 }
 
 .modal--cli .modal-header {
@@ -65,16 +101,10 @@ ul {
   padding: 14px 15px 13px 15px;
 }
 
-.btn--help {
-  background-color: transparent;
-  padding: 6px;
-  line-height: normal;
-  margin-top: 19px;
-}
-
-.glyphicon {
-  font-size: 24px;
-  color: #fff;
+.modal--cli .close,
+.modal--cli button.close.btn--glyphicon {
+  margin-top: 6px;
+  opacity: 1;
 }
 
 .input-group-addon--cli {
@@ -143,5 +173,13 @@ ul {
   footer {
     height: 50px;
     line-height: 50px;
+  }
+
+  .dl--help dd {
+    margin-bottom: 0;
+  }
+
+  .dl--help dt {
+    width: auto;
   }
 }
