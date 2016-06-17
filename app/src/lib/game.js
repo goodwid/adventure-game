@@ -110,7 +110,6 @@ Room.exit = new Room({
   desc: 'Congratulations! you have defeated the monster and made your escape from the house! Thanks for playing...'
 });
 
-
 Room.buildMap = () => {
   function opposite(dir) {
     switch (dir) {
@@ -157,7 +156,6 @@ var user = {
   }
 };
 
-
 class Item {
   constructor (obj) {
     Object.keys(obj).forEach(function(prop){
@@ -166,11 +164,7 @@ class Item {
     if (this.startRoom) this.startRoom.obj.push(this);
   }
   use () {
-    let response = {};
-    if (user.location === this.room) {
-      response.msg = this.action();
-    } else response.msg = 'You cannot use that item here.';
-    return response;
+    return this.action();
   }
 }
 
