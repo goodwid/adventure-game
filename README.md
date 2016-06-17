@@ -13,4 +13,4 @@ To install, clone this repo, then:
     npm install  
     npm start
 
-    
+Connect a browser to localhost:9000 and enjoy the game!
