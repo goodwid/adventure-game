@@ -18,11 +18,11 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?minimize')
       },
       {
   			test: /\.html$/,
-  			loader: 'html'
+  			loader: 'html?minimize',
   		},
       {
         test: /\.js$/,
