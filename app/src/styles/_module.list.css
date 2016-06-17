@@ -25,6 +25,7 @@
   }
 
   .dl--help dt {
-    width: auto;
+    width: 220px;
+    text-align: left;
   }
 }
