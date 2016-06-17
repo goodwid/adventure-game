@@ -62,9 +62,11 @@
             <h2 class="modal-title h1 text-uppercase" id="modal-help-label">Help</h2>
           </div>
           <div class="modal-body">
-            <ul class="list-unstyled">
-              <li ng-repeat="(cmdKey, cmdDescription) in help">{{cmdKey}} - {{cmdDescription}}</li>
-            </ul>
+            <h3>Usage</h3>
+            <dl class="dl-horizontal dl--help">
+              <dt ng-repeat-start="(cmdKey, cmdDescription) in help">{{cmdKey}}</dt>
+              <dd ng-repeat-end>{{cmdDescription}}</dd>
+            </dl>
           </div>
         </div>
       </div>
