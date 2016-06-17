@@ -176,7 +176,7 @@ class Item {
 
 Item.key = new Item({
   name: 'key',
-  startRoom: Room.den,
+  startRoom: Room.dining,
   useRoom: Room.master,
   action() {
     Room.master.n = Room.closet;
@@ -204,7 +204,7 @@ Item.ring = new Item({
     Room.foyer.s = Room.exit;
     delete Room.foyer.trigger;
     Room.foyer.desc = 'You are in the foyer.  You see the front door to the south. The floor is covered in a fine dust.';
-    return 'A beam of light shines into the foyer, striking the monster in the forehead, and he crumbles to dust!';
+    return 'A beam of light shines from the giant ruby on the ring into the foyer, striking the monster in the forehead, and he crumbles to dust!';
   }
 });
 
