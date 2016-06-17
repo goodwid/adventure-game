@@ -1,0 +1,30 @@
+.list--commas {
+  padding-left: 0px;
+  list-style: none;
+}
+
+.list--commas > li:before {
+  content: ', ';
+}
+
+.list--commas > li:first-child:before {
+  content: '\00a0';
+}
+
+.dl--help dt {
+  font-weight: 400;
+}
+
+.dl--help dd {
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .dl--help dd {
+    margin-bottom: 0;
+  }
+
+  .dl--help dt {
+    width: auto;
+  }
+}

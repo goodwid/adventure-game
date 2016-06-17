@@ -1,0 +1,32 @@
+button.close.btn--glyphicon,
+.btn--glyphicon {
+  background-color: transparent;
+  padding: 6px;
+  line-height: normal;
+  margin-top: 19px;
+}
+
+.input-group-addon--cli {
+  font-size: 20px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: #fff;
+}
+
+.input-group .form-control--cli,
+.input-group .form-control--cli:active,
+.input-group .form-control--cli:focus {
+  font-size: 20px;
+  color: #fff;
+  height: auto;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-color: transparent;
+  border-radius: 0;
+  line-height: 1.5;
+  outline: none;
+  box-shadow: none;
+}

@@ -1,0 +1,28 @@
+.modal--cli {
+  background-color: #353b3b;
+}
+
+.modal--cli .modal-dialog {
+  width: auto;
+  margin: 0;
+  height: 100%;
+}
+
+.modal--cli .modal-content {
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  height: 100%;
+}
+
+.modal--cli .modal-header {
+  border-bottom: 1px solid #999;
+  padding: 14px 15px 13px 15px;
+}
+
+.modal--cli .close,
+.modal--cli button.close.btn--glyphicon {
+  margin-top: 6px;
+  opacity: 1;
+}
