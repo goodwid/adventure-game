@@ -19,7 +19,6 @@ export default function cli($scope, $filter, $window, $document) {
       response = command(inputText);
       if (response.help) {
         $('#modal-help').modal('show');
-        console.log('help triggered');
       }
       let inputItem = {
         text: inputText,
