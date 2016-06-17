@@ -48,6 +48,19 @@ ul {
   margin-bottom: 0;
 }
 
+button.close.btn--glyphicon,
+.btn--glyphicon {
+  background-color: transparent;
+  padding: 6px;
+  line-height: normal;
+  margin-top: 19px;
+}
+
+.glyphicon {
+  font-size: 24px;
+  color: #fff;
+}
+
 .modal--cli .modal-dialog {
   width: auto;
   margin: 0;
@@ -65,15 +78,9 @@ ul {
   padding: 14px 15px 13px 15px;
 }
 
-.btn--help {
-  background-color: transparent;
-  padding: 6px;
-  line-height: normal;
-  margin-top: 19px;
-}
-
-.glyphicon {
-  font-size: 24px;
+.modal--cli .close,
+.modal--cli button.close.btn--glyphicon {
+  margin-top: 5px;
   color: #fff;
 }
 
