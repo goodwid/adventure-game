@@ -2,7 +2,7 @@ const HtmlPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/main.js',
   output: {
     path: '../server/public',
     filename: 'scripts/bundle.js'
@@ -20,6 +20,10 @@ module.exports = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       },
+      {
+  			test: /\.html$/,
+  			loader: 'html'
+  		},
       {
         test: /\.js$/,
         exclude: /node_modules/,

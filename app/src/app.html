@@ -1,0 +1,64 @@
+<div ng-controller="cli">
+  <header>
+    <div class="container-fluid">
+      <h1 class="text-uppercase pull-left">Adventure Game</h1>
+      <button type="button" class="btn btn--glyphicon pull-right" data-toggle="modal" data-target="#modal-help">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+  <main>
+    <div class="container-fluid">
+      <ul class="list-unstyled">
+        <li ng-repeat="outputItem in outputList">
+          <span class="color--cyan" ng-if="outputItem.command">&gt;</span>
+          <span ng-bind-html="outputItem.text"></span>
+        </li>
+      </ul>
+      <div class="input-group input-group--cli">
+        <span class="input-group-addon input-group-addon--cli color--cyan" id="addon">&gt;&nbsp;</span>
+        <input type="text" class="form-control form-control--cli" id="input-cli" aria-describedby="addon" ng-keypress="addOutputItem($event)" ng-model="inputText">
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 color--green">
+          <small>
+            <b>Current Location</b>:
+            <span>{{location}}</span>
+          </small>
+        </div>
+        <div class="col-xs-12 col-sm-6 color--yellow">
+          <small ng-class="{'pull-left': inventory.length}">
+            <b>Items in Inventory</b>:
+            <span ng-if="inventory.length === 0">none</span>
+          </small>
+          <ul class="list--commas small" ng-if="inventory.length > 0">
+            <li class="pull-left" ng-repeat="item in inventory">{{item.name}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<div class="modal modal--cli" id="modal-help" tabindex="-1" role="dialog" aria-labelledby="modal-help-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn--glyphicon close" data-dismiss="modal" aria-label="Close">
+          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+        </button>
+        <h2 class="modal-title h1 text-uppercase" id="modal-help-label">Help</h2>
+      </div>
+      <div class="modal-body">
+        <h3>Usage</h3>
+        <dl class="dl-horizontal dl--help">
+          <dt ng-repeat-start="(cmdKey, cmdDescription) in help">{{cmdKey}}</dt>
+          <dd ng-repeat-end>{{cmdDescription}}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
