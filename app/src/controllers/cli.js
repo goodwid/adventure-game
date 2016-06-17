@@ -1,10 +1,10 @@
 import command from './command';
 
-cli.$inject = [  '$scope', '$filter', '$window', '$document'];
+cli.$inject = ['$scope','$filter','$window','$document'];
 
 export default function cli($scope, $filter, $window, $document) {
   $scope.outputList = [];
-  $scope.outputList.push({text:'<p>Welcome to our game!</p><p>You wake up somewhat disoriented in a comfy bed in a strange house.  You look around but can\' get your bearings.<br>All you know for sure is that you need to get out of the house, and the only way out is through the front door.</p>'})
+  $scope.outputList.push({text:'<p>Welcome to our game!</p><p>You wake up somewhat disoriented in a comfy bed in a strange house.  You look around but can\'t get your bearings.  All you know for sure is that you need to get out of the house, and the only way out is through the front door.</p>'})
   let response = command('l');
 
   $scope.location = response.status.location;

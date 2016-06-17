@@ -1,10 +1,6 @@
 import angular from 'angular';
-import controllers from './controllers';
-
+import ngSanitize from 'angular-sanitize';
 import './styles/app.css';
 
-
-import ngSanitize from 'angular-sanitize';
-// import commands from './cli';
-
+import controllers from './controllers';
 angular.module('app', [ngSanitize, controllers]);
