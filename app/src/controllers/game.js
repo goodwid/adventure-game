@@ -26,7 +26,7 @@ class Room {
 
 Room.closet = new Room({
   title: 'closet',
-  desc: 'It\'s dark and there are spiders.  Ew.  There are some vintage clothes on the rod and a high shelf.',
+  desc: 'It\'s dark and there are spiders.  Ew.  There are some vintage clothes on the rod and a high shelf.  South is the door back to the bedroom.',
   trigger() {
     if (this.count === 2) {
       this.obj.push(Item.ring);
@@ -102,7 +102,7 @@ Room.hallwayMiddle = new Room({
 
 Room.hallwaySouth = new Room({
   title: 'hallway',
-  desc: 'You are at the south end of a long hallway.  There are doors to the south and west and the hallway continues north.'
+  desc: 'You are at the south end of a long hallway.  There is a door to the foyer in the south and and another door to the west, and the hallway continues north.'
 });
 
 Room.exit = new Room({
@@ -137,7 +137,7 @@ Room.buildMap = () => {
   connect(Room.hallwaySouth, 'w', Room.smallBedroom);
   connect(Room.hallwayMiddle, 'n', Room.hallwayNorth);
   connect(Room.hallwayNorth, 'w', Room.largeBedroom);
-  connect(Room.hallwayNorth, 'e',Room.master);
+  connect(Room.hallwayNorth, 'e', Room.master);
 }
 
 Room.buildMap();
@@ -181,6 +181,7 @@ Item.key = new Item({
   action() {
     Room.master.n = Room.closet;
     Room.closet.s = Room.master;
+    Room.master.desc = 'You are in the master bedroom.  There is a large bed here, and a chair.  There is an open closet door to the north, and a door to the hallway to the west.'
     let itemIndex = user.inventory.findIndex(item => item.name === this.name);
     user.inventory.splice(itemIndex,1);
     return 'You unlock the closet door to the north.  The key is stuck in the lock.';
@@ -202,7 +203,7 @@ Item.ring = new Item({
   action() {
     Room.foyer.s = Room.exit;
     delete Room.foyer.trigger;
-    Room.foyer.desc = 'There is a froot door to the south. The floor is covered in a fine dust.';
+    Room.foyer.desc = 'You are in the foyer.  You see the front door to the south. The floor is covered in a fine dust.';
     return 'A beam of light shines into the foyer, striking the monster in the forehead, and he crumbles to dust!';
   }
 });
