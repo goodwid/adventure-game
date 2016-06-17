@@ -26,7 +26,7 @@ class Room {
 
 Room.closet = new Room({
   title: 'closet',
-  desc: 'It\'s dark and there are spiders.  Ew.  There are some vintage clothes on the rod and a high shelf.  South is the door back to the bedroom.',
+  desc: 'It\'s dark and there are spiders. Ew. There are some vintage clothes on the rod and a high shelf. South is the door back to the bedroom.',
   trigger() {
     if (this.count === 2) {
       this.obj.push(Item.ring);
@@ -38,17 +38,17 @@ Room.closet = new Room({
 
 Room.kitchen = new Room({
   title: 'kitchen',
-  desc: 'This appears to be a kitchen.  There are cabinets and a stove here.  You smell something familiar but you can\'t place it.  There is a door to the garage in the north, and the den to the south, and an exit to the hallway east.'
+  desc: 'This appears to be a kitchen. There are cabinets and a stove here. You smell something familiar but you can\'t place it. There is a door to the garage in the north, and the den to the south, and an exit to the hallway east.'
 });
 
 Room.dining = new Room({
   title: 'dining room',
-  desc: 'You are in the dining room.  There are a table and chairs here.  The living room is south, and you can enter the hallway to the west.'
+  desc: 'You are in the dining room. There are a table and chairs here. The living room is south, and you can enter the hallway to the west.'
 });
 
 Room.patio = new Room({
   title: 'patio',
-  desc: 'You are in a fenced off patio.  There seems to be no way out except to go back inside.'
+  desc: 'You are in a fenced off patio. There seems to be no way out except to go back inside.'
 });
 
 Room.foyer = new Room({
@@ -56,59 +56,59 @@ Room.foyer = new Room({
   desc: 'There is a front door to the south and doors east and west but you see a monster blocking the pathway!',
   trigger() {
     user.location = Room.living;
-    return '<br><br>BAM!<br><br>The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.<br>There is a comfy sofa here and some end tables.  The foyer is to the west, and the dining room is north.'
+    return '<br><br>BAM!<br><br>The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.<br>There is a comfy sofa here and some end tables. The foyer is to the west, and the dining room is north.'
   }
 });
 
 Room.living = new Room({
   title: 'livingroom',
-  desc: 'There is a comfy sofa here and some end tables.  The foyer is to the west, and the dining room is north.'
+  desc: 'There is a comfy sofa here and some end tables. The foyer is to the west, and the dining room is north.'
 });
 
 Room.garage = new Room({
   title: 'garage',
-  desc: 'You are in the garage.  There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET"  You can return to the kitchen through the door to the south.'
+  desc: 'You are in the garage. There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET"  You can return to the kitchen through the door to the south.'
 });
 
 Room.master = new Room({
   title: 'master bedroom',
-  desc: 'You are in the master bedroom.  There is a large bed here, and a chair.  There is a locked closet to the north, and a door to the hallway to the west.'
+  desc: 'You are in the master bedroom. There is a large bed here, and a chair. There is a locked closet to the north, and a door to the hallway to the west.'
 });
 
 Room.smallBedroom = new Room({
   title: 'small bedroom',
-  desc: 'You\'re in the smaller bedroom.  There is a bed here, and a nightstand.  On the nightstand is a note that reads: "The ring is dangerous!"  There is a door to the east.'
+  desc: 'You\'re in the smaller bedroom. There is a bed here, and a nightstand. On the nightstand is a note that reads: "The ring is dangerous!"  There is a door to the east.'
 });
 
 Room.largeBedroom = new Room({
   title: 'large bedroom',
-  desc: 'This is the larger bedroom.  There is a bed here, and a nightstand.  There is a door to the east.'
+  desc: 'This is the larger bedroom. There is a bed here, and a nightstand. There is a door to the east.'
 });
 
 Room.den = new Room({
   title: 'den',
-  desc: 'You\'re in the den.  Bookshelves line the room.  There is a recliner and a side table facing a small television.  On a small table in the corner, there is a printer with a USB slot.  There is a door to the foyer in the east, and the kitchen in the north.'
+  desc: 'You\'re in the den. Bookshelves line the room. There is a recliner and a side table facing a small television. On a small table in the corner, there is a printer with a USB slot. There is a door to the foyer in the east, and the kitchen in the north.'
 });
 
 Room.hallwayNorth = new Room({
   title: 'hallway',
-  desc: 'You are at the north end of a long hallway.  There are doors to the east and west and the hallway continues south.'
+  desc: 'You are at the north end of a long hallway. There are doors to the east and west and the hallway continues south.'
 });
 
 Room.hallwayMiddle = new Room({
   title: 'hallway',
-  desc: 'You are in a long hallway.  It continues to the north and south, with exits to the east and west.'
+  desc: 'You are in a long hallway. It continues to the north and south, with exits to the east and west.'
 });
 
 Room.hallwaySouth = new Room({
   title: 'hallway',
-  desc: 'You are at the south end of a long hallway.  There is a door to the foyer in the south and and another door to the west, and the hallway continues north.'
+  desc: 'You are at the south end of a long hallway. There is a door to the foyer in the south and and another door to the west, and the hallway continues north.'
 });
 
 Room.exit = new Room({
   title: 'Victory!',
   desc: 'Congratulations! you have defeated the monster and made your escape from the house! Thanks for playing...'
-})
+});
 
 
 Room.buildMap = () => {
@@ -181,10 +181,10 @@ Item.key = new Item({
   action() {
     Room.master.n = Room.closet;
     Room.closet.s = Room.master;
-    Room.master.desc = 'You are in the master bedroom.  There is a large bed here, and a chair.  There is an open closet door to the north, and a door to the hallway to the west.'
+    Room.master.desc = 'You are in the master bedroom. There is a large bed here, and a chair. There is an open closet door to the north, and a door to the hallway to the west.'
     let itemIndex = user.inventory.findIndex(item => item.name === this.name);
     user.inventory.splice(itemIndex,1);
-    return 'You unlock the closet door to the north.  The key is stuck in the lock.';
+    return 'You unlock the closet door to the north. The key is stuck in the lock.';
   }
 });
 
@@ -203,7 +203,7 @@ Item.ring = new Item({
   action() {
     Room.foyer.s = Room.exit;
     delete Room.foyer.trigger;
-    Room.foyer.desc = 'You are in the foyer.  You see the front door to the south. The floor is covered in a fine dust.';
+    Room.foyer.desc = 'You are in the foyer. You see the front door to the south. The floor is covered in a fine dust.';
     return 'A beam of light shines from the giant ruby on the ring into the foyer, striking the monster in the forehead, and he crumbles to dust!';
   }
 });
