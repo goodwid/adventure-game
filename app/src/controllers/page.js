@@ -1,4 +1,4 @@
-import help from './help';
+import help from '../lib/help';
 
 page.$inject=['$scope','$document'];
 

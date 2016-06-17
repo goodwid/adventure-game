@@ -1,4 +1,4 @@
-import command from './command';
+import command from '../lib/command';
 
 cli.$inject = ['$scope','$filter','$window','$document'];
 
