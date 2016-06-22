@@ -82,7 +82,7 @@ Room.smallBedroom = new Room({
 
 Room.largeBedroom = new Room({
   title: 'large bedroom',
-  desc: 'This is the larger bedroom. There is a bed here, and a nightstand. There is a door to the east.'
+  desc: 'This is the larger of the two bedrooms. There is a bed here, and a nightstand. There is a door to the east.'
 });
 
 Room.den = new Room({
