@@ -38,7 +38,7 @@ Room.closet = new Room({
 
 Room.kitchen = new Room({
   title: 'kitchen',
-  desc: 'This appears to be a kitchen. There are cabinets and a stove here. You smell something familiar but you can\'t place it. There is a door to the garage in the north, and the den to the south, and an exit to the hallway east.'
+  desc: 'This appears to be a kitchen. There are cabinets and a stove here. You smell something familiar but you can\'t place it. There is a door to the garage in the north, and the den to the south, and an exit to the hallway east.',
 });
 
 Room.dining = new Room({
@@ -110,7 +110,7 @@ Room.exit = new Room({
   desc: 'Congratulations! you have defeated the monster and made your escape from the house! Thanks for playing...'
 });
 
-Room.buildMap = () => {
+function buildMap() {
   function opposite(dir) {
     switch (dir) {
       case 'n': { return 's'; break; }
@@ -139,7 +139,7 @@ Room.buildMap = () => {
   connect(Room.hallwayNorth, 'e', Room.master);
 }
 
-Room.buildMap();
+buildMap();
 
 var user = {
   location: Room.master,

@@ -16,12 +16,12 @@ export default function cli($scope, $filter, $window, $document) {
   $scope.location = response.status.location;
   $scope.outputList.push(response);
   $scope.inventory = '';
-
+  const lowercase = $filter('lowercase');
   $scope.addOutputItem = ($event) => {
     let keyCode = $event.which || $event.keyCode;
 
     if (keyCode === 13) {
-      let inputText = $filter('lowercase')($scope.inputText);
+      let inputText = lowercase($scope.inputText);
       response = command(inputText);
       if (response.help) {
         $('#modal-help').modal('show');
