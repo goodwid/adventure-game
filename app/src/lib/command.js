@@ -79,7 +79,7 @@ export default (c) => {
       break;
     }
     case 'credits': {
-      response.text = 'Created by Johnny Luangphasy and David Goodwin, 2016.  MIT license.';
+      response.text = 'Created by Johnny Luangphasy and David Goodwin. Copyright 2016. <a href="https://opensource.org/licenses/MIT">MIT license.</a> <a href="https://github.com/goodwid/adventure-game">GitHub repo.</a>';
       break;
     }
     case 'help':
