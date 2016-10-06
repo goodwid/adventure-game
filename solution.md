@@ -7,14 +7,25 @@
 - use the flashdrive to get the message from the printer.
 - return to the master bedroom closet.
 - get the item that falls onto the floor (ring).
-- use it north of the monster.
+- go to the garage, get the crowbar.
+- go upstairs to the loft, use the crowbar.
+- enter the attic, get the shield.
+- return to the foyer.
+- use the ring, which will destroy the monster.
 
 
 
 <pre>
  Map:
-                           closet
-                            |
+
+
+
+
+
+
+     loft - - - attic   
+      /                    closet
+     /                       |
   garage  bedroom - - - - master
      |              |
      |              |

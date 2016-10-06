@@ -82,6 +82,12 @@ export default (c) => {
       console.log('user: ', user);
       break;
     }
+    case 'reset':
+    case 'restart':
+    case 'reload': {
+      location.reload();
+      break;
+    }
     case 'credits': {
       response.text = 'Created by Johnny Luangphasy and David Goodwin. Copyright 2016. <a href="https://opensource.org/licenses/MIT">MIT license.</a> <a href="https://github.com/goodwid/adventure-game">GitHub repo.</a>';
       break;

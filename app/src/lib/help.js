@@ -11,6 +11,7 @@ const help = {
   'look, l': 'review the description of the room',
   'inventory, i, inv': 'list of items collected',
   'help': 'show this list of commands',
+  'restart': 'reload the page',
   'credits': 'about us'
 };
 

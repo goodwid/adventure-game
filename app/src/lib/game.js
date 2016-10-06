@@ -25,6 +25,18 @@ class Room {
   }
 }
 
+class Item {
+  constructor (obj) {
+    Object.keys(obj).forEach(function(prop){
+      this[prop] = obj[prop];
+    }, this);
+    if (this.startRoom) this.startRoom.obj.push(this);
+  }
+  use () {
+    return this.action();
+  }
+}
+
 Room.closet = new Room({
   title: 'closet',
   desc: 'It\'s dark and there are spiders. Ew. There are some vintage clothes on the rod and a high shelf. South is the door back to the bedroom.',
@@ -57,7 +69,7 @@ Room.foyer = new Room({
   desc: 'There is a front door to the south and doors east and west but you see a monster blocking the pathway!',
   trigger() {
     if (user.inventory.indexOf(Item.shield) > -1) {
-      return '<br>The monster smacks you hard but you deflect his blow with the shield.  He swings a few more times to no effect.<br>The monster is pacing around the foyer staring at you, but oyu still can\'t get past him.';
+      return '<br>The monster smacks you hard but you deflect his blow with the shield.  He swings a few more times to no effect.<br>The monster is pacing around the foyer staring at you, but you still can\'t get past him.';
     } else {
       user.location = Room.living;
       return '<br><br>BAM!<br><br>The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.<br>There is a comfy sofa here and some end tables. The foyer is to the west, and the dining room is north.'
@@ -125,69 +137,6 @@ Room.exit = new Room({
   desc: 'Congratulations! you have defeated the monster and made your escape from the house! Thanks for playing...'
 });
 
-function buildMap() {
-  function opposite(dir) {
-    switch (dir) {
-      case 'n': { return 's'; break; }
-      case 's': { return 'n'; break; }
-      case 'e': { return 'w'; break; }
-      case 'w': { return 'e'; break; }
-      case 'u': { return 'd'; break; }
-      case 'd': { return 'u'; break; }
-    }
-  }
-  function connect(room1, dir, room2) {
-    room1[dir] = room2;
-    room2[opposite(dir)] = room1;
-  }
-  connect(Room.foyer, 'n', Room.hallwaySouth);
-  connect(Room.hallwaySouth, 'n', Room.hallwayMiddle);
-  connect(Room.hallwayMiddle, 'e', Room.dining);
-  connect(Room.hallwayMiddle, 'w', Room.kitchen);
-  connect(Room.kitchen, 'n', Room.garage);
-  connect(Room.kitchen, 's', Room.den);
-  connect(Room.den, 'e', Room.foyer);
-  connect(Room.foyer, 'e', Room.living);
-  connect(Room.living, 'n', Room.dining);
-  connect(Room.living, 'e', Room.patio);
-  connect(Room.hallwaySouth, 'w', Room.smallBedroom);
-  connect(Room.hallwayMiddle, 'n', Room.hallwayNorth);
-  connect(Room.hallwayNorth, 'w', Room.largeBedroom);
-  connect(Room.hallwayNorth, 'e', Room.master);
-  connect(Room.garage, 'u', Room.loft);
-}
-
-buildMap();
-
-var user = {
-  location: Room.master,
-  inventory: [],
-  go (dir) {
-    let response = '';
-    let result = this.location.travel(dir);
-    if (result.room) {
-      this.location = result.room;
-      this.location.count++;
-    }
-    response = result.text;
-    if (this.location.trigger) response += this.location.trigger();
-    if (this.location.obj) this.location.obj.forEach(item => response += (`<br>There is a ${item.name} on the floor.`));
-    return response;
-  }
-};
-
-class Item {
-  constructor (obj) {
-    Object.keys(obj).forEach(function(prop){
-      this[prop] = obj[prop];
-    }, this);
-    if (this.startRoom) this.startRoom.obj.push(this);
-  }
-  use () {
-    return this.action();
-  }
-}
-
 Item.shield = new Item({
   name: 'shield',
   startRoom: Room.attic,
@@ -223,16 +172,6 @@ Item.crowbar = new Item({
   }
 });
 
-// Item.magazine = new Item({
-//   name: 'magazine',
-//   startRoom: Room.attic,
-//   useRoom: 'any',
-//   action() {
-//     return 'You open the magazine and flip through the pages.  It contains a recipe for mead dating back to 1873.';
-//   }
-// });
-
-
 Item.usb = new Item({
   name: 'flashdrive',
   startRoom: Room.closet,
@@ -252,5 +191,56 @@ Item.ring = new Item({
     return 'A beam of light shines from the giant ruby on the ring, striking the monster in the forehead, and he crumbles to dust!';
   }
 });
+
+function buildMap() {
+  function opposite(dir) {
+    switch (dir) {
+      case 'n': { return 's'; break; }
+      case 's': { return 'n'; break; }
+      case 'e': { return 'w'; break; }
+      case 'w': { return 'e'; break; }
+      case 'u': { return 'd'; break; }
+      case 'd': { return 'u'; break; }
+    }
+  }
+  function connect(room1, dir, room2) {
+    room1[dir] = room2;
+    room2[opposite(dir)] = room1;
+  }
+  connect(Room.foyer, 'n', Room.hallwaySouth);
+  connect(Room.hallwaySouth, 'n', Room.hallwayMiddle);
+  connect(Room.hallwayMiddle, 'e', Room.dining);
+  connect(Room.hallwayMiddle, 'w', Room.kitchen);
+  connect(Room.kitchen, 'n', Room.garage);
+  connect(Room.kitchen, 's', Room.den);
+  connect(Room.den, 'e', Room.foyer);
+  connect(Room.foyer, 'e', Room.living);
+  connect(Room.living, 'n', Room.dining);
+  connect(Room.living, 'e', Room.patio);
+  connect(Room.hallwaySouth, 'w', Room.smallBedroom);
+  connect(Room.hallwayMiddle, 'n', Room.hallwayNorth);
+  connect(Room.hallwayNorth, 'w', Room.largeBedroom);
+  connect(Room.hallwayNorth, 'e', Room.master);
+  connect(Room.garage, 'u', Room.loft);
+}
+
+var user = {
+  location: Room.master,
+  inventory: [],
+  go (dir) {
+    let response = '';
+    let result = this.location.travel(dir);
+    if (result.room) {
+      this.location = result.room;
+      this.location.count++;
+    }
+    response = result.text;
+    if (this.location.trigger) response += this.location.trigger();
+    if (this.location.obj) this.location.obj.forEach(item => response += (`<br>There is a ${item.name} on the floor.`));
+    return response;
+  }
+};
+
+buildMap();
 
 export {Room, Item, user};
