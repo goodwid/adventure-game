@@ -3,6 +3,8 @@ const help = {
   'east, e': 'travel east',
   'south, s': 'travel south',
   'west, w': 'travel west',
+  'up, u': 'travel up',
+  'down, d': 'travel down',
   'get <item>': 'get an item',
   'drop <item>': 'drop an item',
   'use <item>': 'use an item',

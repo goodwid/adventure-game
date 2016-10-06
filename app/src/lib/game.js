@@ -5,6 +5,7 @@ class Room {
     }, this);
     this.obj = [];
     this.count = 0;
+    this.n = this.e = this.w = this.s = null;
   }
   travel (dir) {
     let response = {room: this[dir]};
@@ -117,6 +118,8 @@ function buildMap() {
       case 's': { return 'n'; break; }
       case 'e': { return 'w'; break; }
       case 'w': { return 'e'; break; }
+      case 'u': { return 'd'; break; }
+      case 'd': { return 'u'; break; }
     }
   }
   function connect(room1, dir, room2) {
@@ -147,8 +150,10 @@ var user = {
   go (dir) {
     let response = '';
     let result = this.location.travel(dir);
-    if (result.room) this.location = result.room;
-    this.location.count++;
+    if (result.room) {
+      this.location = result.room;
+      this.location.count++;
+    }
     response = result.text;
     if (this.location.trigger) response += this.location.trigger();
     if (this.location.obj) this.location.obj.forEach(item => response += (`<br>There is a ${item.name} on the floor.`));

@@ -10,6 +10,10 @@ export default (c) => {
     case 'south':
     case 'east':
     case 'west':
+    case 'up':
+    case 'down':
+    case 'u':
+    case 'd':
     case 'n':
     case 'e':
     case 's':
