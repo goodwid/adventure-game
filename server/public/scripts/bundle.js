@@ -31957,6 +31957,8 @@
 	  'east, e': 'travel east',
 	  'south, s': 'travel south',
 	  'west, w': 'travel west',
+	  'up, u': 'travel up',
+	  'down, d': 'travel down',
 	  'get <item>': 'get an item',
 	  'drop <item>': 'drop an item',
 	  'use <item>': 'use an item',
@@ -32053,6 +32055,10 @@
 	    case 'south':
 	    case 'east':
 	    case 'west':
+	    case 'up':
+	    case 'down':
+	    case 'u':
+	    case 'd':
 	    case 'n':
 	    case 'e':
 	    case 's':
@@ -32125,7 +32131,7 @@
 	        });
 	        if (_itemIndex2 > -1) {
 	          var _item2 = _game.user.inventory[_itemIndex2];
-	          if (_item2.useRoom === _game.user.location) {
+	          if (_item2.useRoom === _game.user.location || _item2.useRoom === 'any') {
 	            response.text = _item2.action();
 	          } else {
 	            response.text = 'You cannot use that here.';
@@ -32183,6 +32189,7 @@
 	    }, this);
 	    this.obj = [];
 	    this.count = 0;
+	    this.n = this.e = this.w = this.s = null;
 	  }
 	
 	  _createClass(Room, [{
@@ -32255,7 +32262,17 @@
 	
 	Room.garage = new Room({
 	  title: 'garage',
-	  desc: 'You are in the garage. There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET"  You can return to the kitchen through the door to the south.'
+	  desc: 'You are in the garage. There is a dusty workbench here with a crowbar on it. In the dust is scrawled "SEARCH THE CLOSET"  There are stairs up to a loft. You can also return to the kitchen through the door to the south.'
+	});
+	
+	Room.loft = new Room({
+	  title: 'loft',
+	  desc: 'You are in dusty loft above the garage.  There isn\'t much here. There is a boarded up opening. You can go back down the stairs to the garage.'
+	});
+	
+	Room.attic = new Room({
+	  title: 'attic',
+	  desc: 'You emerge from the crawlspace to find yourself in a years-neglected attic.'
 	});
 	
 	Room.master = new Room({
@@ -32317,6 +32334,14 @@
 	        {
 	          return 'e';break;
 	        }
+	      case 'u':
+	        {
+	          return 'd';break;
+	        }
+	      case 'd':
+	        {
+	          return 'u';break;
+	        }
 	    }
 	  }
 	  function connect(room1, dir, room2) {
@@ -32337,6 +32362,7 @@
 	  connect(Room.hallwayMiddle, 'n', Room.hallwayNorth);
 	  connect(Room.hallwayNorth, 'w', Room.largeBedroom);
 	  connect(Room.hallwayNorth, 'e', Room.master);
+	  connect(Room.garage, 'u', Room.loft);
 	}
 	
 	buildMap();
@@ -32347,8 +32373,10 @@
 	  go: function go(dir) {
 	    var response = '';
 	    var result = this.location.travel(dir);
-	    if (result.room) this.location = result.room;
-	    this.location.count++;
+	    if (result.room) {
+	      this.location = result.room;
+	      this.location.count++;
+	    }
 	    response = result.text;
 	    if (this.location.trigger) response += this.location.trigger();
 	    if (this.location.obj) this.location.obj.forEach(function (item) {
@@ -32393,6 +32421,27 @@
 	    });
 	    user.inventory.splice(itemIndex, 1);
 	    return 'You unlock the closet door to the north. The key is stuck in the lock.';
+	  }
+	});
+	
+	Item.crowbar = new Item({
+	  name: 'crowbar',
+	  startRoom: Room.garage,
+	  useRoom: Room.loft,
+	  action: function action() {
+	    Room.loft.e = Room.attic;
+	    Room.attic.w = Room.loft;
+	    Room.loft.desc = 'You are in dusty loft above the garage.  There isn\'t much here. There is a passage to the east. You can go back down the stairs to the garage.';
+	    return 'You pry the boards off the opening and see a passageway to the east.';
+	  }
+	});
+	
+	Item.magazine = new Item({
+	  name: 'magazine',
+	  startRoom: Room.attic,
+	  useRoom: 'any',
+	  action: function action() {
+	    return 'You open the magazine and flip through the pages.  It contains a recipe for mead dating back to 1873.';
 	  }
 	});
 	

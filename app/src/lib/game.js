@@ -78,7 +78,7 @@ Room.loft = new Room({
 
 Room.attic = new Room({
   title: 'attic',
-  desc: 'You emerge from the crawlspace to find yourself in a years-neglected attic.  There is a magazine here.'
+  desc: 'You emerge from the crawlspace to find yourself in a years-neglected attic.'
 })
 
 Room.master = new Room({
