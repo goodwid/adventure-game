@@ -68,8 +68,18 @@ Room.living = new Room({
 
 Room.garage = new Room({
   title: 'garage',
-  desc: 'You are in the garage. There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET"  You can return to the kitchen through the door to the south.'
+  desc: 'You are in the garage. There is a dusty workbench here with a crowbar on it. In the dust is scrawled "SEARCH THE CLOSET"  There are stairs up to a loft. You can also return to the kitchen through the door to the south.'
 });
+
+Room.loft = new Room({
+  title: 'loft',
+  desc: 'You are in dusty loft above the garage.  There isn\'t much here. There is a boarded up opening. You can go back down the stairs to the garage.'
+});
+
+Room.attic = new Room({
+  title: 'attic',
+  desc: 'You emerge from the crawlspace to find yourself in a years-neglected attic.  There is a magazine here.'
+})
 
 Room.master = new Room({
   title: 'master bedroom',
@@ -140,6 +150,7 @@ function buildMap() {
   connect(Room.hallwayMiddle, 'n', Room.hallwayNorth);
   connect(Room.hallwayNorth, 'w', Room.largeBedroom);
   connect(Room.hallwayNorth, 'e', Room.master);
+  connect(Room.garage, 'u', Room.loft);
 }
 
 buildMap();
@@ -186,6 +197,28 @@ Item.key = new Item({
     return 'You unlock the closet door to the north. The key is stuck in the lock.';
   }
 });
+
+Item.crowbar = new Item({
+  name: 'crowbar',
+  startRoom: Room.garage,
+  useRoom: Room.loft,
+  action() {
+    Room.loft.e = Room.attic;
+    Room.attic.w = Room.loft;
+    Room.loft.desc = 'You are in dusty loft above the garage.  There isn\'t much here. There is a passage to the east. You can go back down the stairs to the garage.'
+    return 'You pry the boards off the opening and see a passageway to the east.'
+  }
+});
+
+Item.magazine = new Item({
+  name: 'magazine',
+  startRoom: Room.attic,
+  useRoom: 'any',
+  action() {
+    return 'You open the magazine and flip through the pages.  It contains a recipe for mead dating back to 1873.';
+  }
+});
+
 
 Item.usb = new Item({
   name: 'flashdrive',

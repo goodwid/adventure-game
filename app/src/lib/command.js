@@ -70,7 +70,7 @@ export default (c) => {
       let itemIndex = user.inventory.findIndex(item => item.name === itemName);
       if (itemIndex > -1) {
         let item = user.inventory[itemIndex];
-        if (item.useRoom === user.location) {
+        if (item.useRoom === user.location || item.useRoom === 'any') {
           response.text = item.action();
         } else {
           response.text = 'You cannot use that here.';
