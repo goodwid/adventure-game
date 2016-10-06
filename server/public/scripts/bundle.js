@@ -32286,6 +32286,15 @@
 	    }
 	  }
 	});
+	Room.basement = new Room({
+	  title: 'basement',
+	  desc: 'It\'s dark here, you can barely see anything but the stairs behind you.'
+	});
+	
+	Room.shelter = new Room({
+	  title: 'cellar',
+	  desc: 'You are in a dank bomb shelter.  There is a smell of mold and some clay pots with long-dead plants. The only exit is a hatch to the east.'
+	});
 	
 	Room.living = new Room({
 	  title: 'livingroom',
@@ -32339,7 +32348,7 @@
 	
 	Room.hallwaySouth = new Room({
 	  title: 'hallway',
-	  desc: 'You are at the south end of a long hallway. There is a door to the foyer in the south and and another door to the west, and the hallway continues north.'
+	  desc: 'You are at the south end of a long hallway. There is a door to the foyer in the south and and another door to the west, and the hallway continues north.  There is a spiral staircase going down here as well'
 	});
 	
 	Room.exit = new Room({
@@ -32406,6 +32415,18 @@
 	  }
 	});
 	
+	Item.lantern = new Item({
+	  name: 'lantern',
+	  startRoom: Room.smallBedroom,
+	  useRoom: 'any',
+	  action: function action() {
+	    Room.basement.desc = 'It is still dark but you can make out some details.  There is a hole in the wall to the west.';
+	    Room.basement.w = Room.shelter;
+	    Room.shelter.e = Room.basement;
+	    return 'You light the lantern.  A warm light fills the room.';
+	  }
+	});
+	
 	function buildMap() {
 	  function opposite(dir) {
 	    switch (dir) {
@@ -32454,6 +32475,7 @@
 	  connect(Room.hallwayNorth, 'w', Room.largeBedroom);
 	  connect(Room.hallwayNorth, 'e', Room.master);
 	  connect(Room.garage, 'u', Room.loft);
+	  connect(Room.hallwaySouth, 'd', Room.basement);
 	}
 	
 	var user = {
