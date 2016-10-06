@@ -31965,6 +31965,7 @@
 	  'look, l': 'review the description of the room',
 	  'inventory, i, inv': 'list of items collected',
 	  'help': 'show this list of commands',
+	  'restart': 'reload the page',
 	  'credits': 'about us'
 	};
 	
@@ -32144,6 +32145,13 @@
 	        console.log('user: ', _game.user);
 	        break;
 	      }
+	    case 'reset':
+	    case 'restart':
+	    case 'reload':
+	      {
+	        location.reload();
+	        break;
+	      }
 	    case 'credits':
 	      {
 	        response.text = 'Created by Johnny Luangphasy and David Goodwin. Copyright 2016. <a href="https://opensource.org/licenses/MIT">MIT license.</a> <a href="https://github.com/goodwid/adventure-game">GitHub repo.</a>';
@@ -32219,6 +32227,26 @@
 	  return Room;
 	}();
 	
+	var Item = function () {
+	  function Item(obj) {
+	    _classCallCheck(this, Item);
+	
+	    Object.keys(obj).forEach(function (prop) {
+	      this[prop] = obj[prop];
+	    }, this);
+	    if (this.startRoom) this.startRoom.obj.push(this);
+	  }
+	
+	  _createClass(Item, [{
+	    key: 'use',
+	    value: function use() {
+	      return this.action();
+	    }
+	  }]);
+	
+	  return Item;
+	}();
+	
 	Room.closet = new Room({
 	  title: 'closet',
 	  desc: 'It\'s dark and there are spiders. Ew. There are some vintage clothes on the rod and a high shelf. South is the door back to the bedroom.',
@@ -32250,8 +32278,12 @@
 	  title: 'foyer',
 	  desc: 'There is a front door to the south and doors east and west but you see a monster blocking the pathway!',
 	  trigger: function trigger() {
-	    user.location = Room.living;
-	    return '<br><br>BAM!<br><br>The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.<br>There is a comfy sofa here and some end tables. The foyer is to the west, and the dining room is north.';
+	    if (user.inventory.indexOf(Item.shield) > -1) {
+	      return '<br>The monster smacks you hard but you deflect his blow with the shield.  He swings a few more times to no effect.<br>The monster is pacing around the foyer staring at you, but you still can\'t get past him.';
+	    } else {
+	      user.location = Room.living;
+	      return '<br><br>BAM!<br><br>The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.<br>There is a comfy sofa here and some end tables. The foyer is to the west, and the dining room is north.';
+	    }
 	  }
 	});
 	
@@ -32315,6 +32347,65 @@
 	  desc: 'Congratulations! you have defeated the monster and made your escape from the house! Thanks for playing...'
 	});
 	
+	Item.shield = new Item({
+	  name: 'shield',
+	  startRoom: Room.attic,
+	  useRoom: 'any',
+	  action: function action() {
+	    return 'It doesn\'t seem to <strong>do</strong> anything, but it feels powerful.';
+	  }
+	});
+	
+	Item.key = new Item({
+	  name: 'key',
+	  startRoom: Room.dining,
+	  useRoom: Room.master,
+	  action: function action() {
+	    var _this = this;
+	
+	    Room.master.n = Room.closet;
+	    Room.closet.s = Room.master;
+	    Room.master.desc = 'You are in the master bedroom. There is a large bed here, and a chair. There is an open closet door to the north, and a door to the hallway to the west.';
+	    var itemIndex = user.inventory.findIndex(function (item) {
+	      return item.name === _this.name;
+	    });
+	    user.inventory.splice(itemIndex, 1);
+	    return 'You unlock the closet door to the north. The key is stuck in the lock.';
+	  }
+	});
+	
+	Item.crowbar = new Item({
+	  name: 'crowbar',
+	  startRoom: Room.garage,
+	  useRoom: Room.loft,
+	  action: function action() {
+	    Room.loft.e = Room.attic;
+	    Room.attic.w = Room.loft;
+	    Room.loft.desc = 'You are in dusty loft above the garage.  There isn\'t much here. There is a passage to the east. You can go back down the stairs to the garage.';
+	    return 'You pry the boards off the opening and see a passageway to the east.';
+	  }
+	});
+	
+	Item.usb = new Item({
+	  name: 'flashdrive',
+	  startRoom: Room.closet,
+	  useRoom: Room.den,
+	  action: function action() {
+	    return 'The printer starts to heat up and after a moment it prints out a message:<br>Find the shield, it will protect you!';
+	  }
+	});
+	
+	Item.ring = new Item({
+	  name: 'ring',
+	  useRoom: Room.foyer,
+	  action: function action() {
+	    Room.foyer.s = Room.exit;
+	    delete Room.foyer.trigger;
+	    Room.foyer.desc = 'You are in the foyer. You see the front door to the south. The floor is covered in a fine dust.';
+	    return 'A beam of light shines from the giant ruby on the ring, striking the monster in the forehead, and he crumbles to dust!';
+	  }
+	});
+	
 	function buildMap() {
 	  function opposite(dir) {
 	    switch (dir) {
@@ -32365,8 +32456,6 @@
 	  connect(Room.garage, 'u', Room.loft);
 	}
 	
-	buildMap();
-	
 	var user = {
 	  location: Room.master,
 	  inventory: [],
@@ -32386,84 +32475,7 @@
 	  }
 	};
 	
-	var Item = function () {
-	  function Item(obj) {
-	    _classCallCheck(this, Item);
-	
-	    Object.keys(obj).forEach(function (prop) {
-	      this[prop] = obj[prop];
-	    }, this);
-	    if (this.startRoom) this.startRoom.obj.push(this);
-	  }
-	
-	  _createClass(Item, [{
-	    key: 'use',
-	    value: function use() {
-	      return this.action();
-	    }
-	  }]);
-	
-	  return Item;
-	}();
-	
-	Item.key = new Item({
-	  name: 'key',
-	  startRoom: Room.dining,
-	  useRoom: Room.master,
-	  action: function action() {
-	    var _this = this;
-	
-	    Room.master.n = Room.closet;
-	    Room.closet.s = Room.master;
-	    Room.master.desc = 'You are in the master bedroom. There is a large bed here, and a chair. There is an open closet door to the north, and a door to the hallway to the west.';
-	    var itemIndex = user.inventory.findIndex(function (item) {
-	      return item.name === _this.name;
-	    });
-	    user.inventory.splice(itemIndex, 1);
-	    return 'You unlock the closet door to the north. The key is stuck in the lock.';
-	  }
-	});
-	
-	Item.crowbar = new Item({
-	  name: 'crowbar',
-	  startRoom: Room.garage,
-	  useRoom: Room.loft,
-	  action: function action() {
-	    Room.loft.e = Room.attic;
-	    Room.attic.w = Room.loft;
-	    Room.loft.desc = 'You are in dusty loft above the garage.  There isn\'t much here. There is a passage to the east. You can go back down the stairs to the garage.';
-	    return 'You pry the boards off the opening and see a passageway to the east.';
-	  }
-	});
-	
-	Item.magazine = new Item({
-	  name: 'magazine',
-	  startRoom: Room.attic,
-	  useRoom: 'any',
-	  action: function action() {
-	    return 'You open the magazine and flip through the pages.  It contains a recipe for mead dating back to 1873.';
-	  }
-	});
-	
-	Item.usb = new Item({
-	  name: 'flashdrive',
-	  startRoom: Room.closet,
-	  useRoom: Room.den,
-	  action: function action() {
-	    return 'The printer starts to heat up and after a moment it prints out a message:<br>Attack from the North!';
-	  }
-	});
-	
-	Item.ring = new Item({
-	  name: 'ring',
-	  useRoom: Room.hallwaySouth,
-	  action: function action() {
-	    Room.foyer.s = Room.exit;
-	    delete Room.foyer.trigger;
-	    Room.foyer.desc = 'You are in the foyer. You see the front door to the south. The floor is covered in a fine dust.';
-	    return 'A beam of light shines from the giant ruby on the ring into the foyer, striking the monster in the forehead, and he crumbles to dust!';
-	  }
-	});
+	buildMap();
 	
 	exports.Room = Room;
 	exports.Item = Item;
