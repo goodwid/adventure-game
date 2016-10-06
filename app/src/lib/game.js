@@ -56,8 +56,12 @@ Room.foyer = new Room({
   title: 'foyer',
   desc: 'There is a front door to the south and doors east and west but you see a monster blocking the pathway!',
   trigger() {
-    user.location = Room.living;
-    return '<br><br>BAM!<br><br>The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.<br>There is a comfy sofa here and some end tables. The foyer is to the west, and the dining room is north.'
+    if (user.inventory.indexOf(Item.shield) > -1) {
+      return '<br>The monster smacks you hard but you deflect his blow with the shield.  He swings a few more times to no effect.<br>The monster is pacing around the foyer staring at you, but oyu still can\'t get past him.';
+    } else {
+      user.location = Room.living;
+      return '<br><br>BAM!<br><br>The monster smacks you hard and you stumble out of the room, landing on a couch in the living room.<br>There is a comfy sofa here and some end tables. The foyer is to the west, and the dining room is north.'
+    }
   }
 });
 
@@ -184,6 +188,15 @@ class Item {
   }
 }
 
+Item.shield = new Item({
+  name: 'shield',
+  startRoom: Room.attic,
+  useRoom: 'any',
+  action() {
+    return 'It doesn\'t seem to <strong>do</strong> anything, but it feels powerful.';
+  }
+});
+
 Item.key = new Item({
   name: 'key',
   startRoom: Room.dining,
@@ -210,14 +223,14 @@ Item.crowbar = new Item({
   }
 });
 
-Item.magazine = new Item({
-  name: 'magazine',
-  startRoom: Room.attic,
-  useRoom: 'any',
-  action() {
-    return 'You open the magazine and flip through the pages.  It contains a recipe for mead dating back to 1873.';
-  }
-});
+// Item.magazine = new Item({
+//   name: 'magazine',
+//   startRoom: Room.attic,
+//   useRoom: 'any',
+//   action() {
+//     return 'You open the magazine and flip through the pages.  It contains a recipe for mead dating back to 1873.';
+//   }
+// });
 
 
 Item.usb = new Item({
@@ -225,18 +238,18 @@ Item.usb = new Item({
   startRoom: Room.closet,
   useRoom: Room.den,
   action() {
-    return 'The printer starts to heat up and after a moment it prints out a message:<br>Attack from the North!';
+    return 'The printer starts to heat up and after a moment it prints out a message:<br>Find the shield, it will protect you!';
   }
 });
 
 Item.ring = new Item({
   name: 'ring',
-  useRoom: Room.hallwaySouth,
+  useRoom: Room.foyer,
   action() {
     Room.foyer.s = Room.exit;
     delete Room.foyer.trigger;
     Room.foyer.desc = 'You are in the foyer. You see the front door to the south. The floor is covered in a fine dust.';
-    return 'A beam of light shines from the giant ruby on the ring into the foyer, striking the monster in the forehead, and he crumbles to dust!';
+    return 'A beam of light shines from the giant ruby on the ring, striking the monster in the forehead, and he crumbles to dust!';
   }
 });
 
