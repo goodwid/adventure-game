@@ -171,7 +171,7 @@ Item.key = new Item({
 
 Item.crowbar = new Item({
   name: 'crowbar',
-  startRoom: Room.garage,
+  startRoom: Room.shelter,
   useRoom: Room.loft,
   action() {
     Room.loft.e = Room.attic;
@@ -203,7 +203,7 @@ Item.ring = new Item({
 
 Item.lantern = new Item({
   name: 'lantern',
-  startRoom: Room.smallBedroom,
+  startRoom: Room.garage,
   useRoom: 'any',
   action() {
     Room.basement.desc = 'It is still dark but you can make out some details.  There is a hole in the wall to the west.';

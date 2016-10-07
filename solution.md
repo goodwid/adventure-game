@@ -5,7 +5,12 @@
 - use the key to unlock the closet.
 - enter the closet, get the flashdrive, and go to the den.
 - use the flashdrive to get the message from the printer.
-- go to the garage, get the crowbar.
+- go to the garage, get the lantern.
+- go to the south hallway.
+- use the lantern.
+- go downstairs to the shelter.
+- get the crowbar.
+- return to the garage.
 - go upstairs to the loft, use the crowbar.
 - enter the attic, get the shield.
 - return to the master bedroom closet.
@@ -26,11 +31,11 @@
      |              |
    kitchen - - -  hallway - - - dining room
      |              |                 |
-     |     bedroom -|                 |
-     |              |                 |
-     |              |                 |
+     |     bedroom -|\                |
+     |              | \               |
+     |              |  \              |
     den - - - - - foyer - - - - - living room - - patio
-                    |
-                    |
+                    |     \
+                    |   basement - - - shelter
                   exit!
 </pre>
