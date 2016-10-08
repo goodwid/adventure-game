@@ -32303,7 +32303,7 @@
 	
 	Room.garage = new Room({
 	  title: 'garage',
-	  desc: 'You are in the garage. There is a dusty workbench here with a crowbar on it. In the dust is scrawled "SEARCH THE CLOSET"  There are stairs up to a loft. You can also return to the kitchen through the door to the south.'
+	  desc: 'You are in the garage. There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET"  There are stairs up to a loft. You can also return to the kitchen through the door to the south.'
 	});
 	
 	Room.loft = new Room({
