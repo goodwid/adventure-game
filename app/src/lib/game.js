@@ -93,7 +93,7 @@ Room.living = new Room({
 
 Room.garage = new Room({
   title: 'garage',
-  desc: 'You are in the garage. There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET"  There are stairs up to a loft. You can also return to the kitchen through the door to the south.'
+  desc: 'You are in the garage. There is a dusty workbench here. In the dust is scrawled "SEARCH THE CLOSET".  There are stairs up to a loft. You can also return to the kitchen through the door to the south.'
 });
 
 Room.loft = new Room({
@@ -181,7 +181,7 @@ Item.crowbar = new Item({
   }
 });
 
-Item.usb = new Item({
+Item.flashdrive = new Item({
   name: 'flashdrive',
   startRoom: Room.closet,
   useRoom: Room.den,
@@ -206,7 +206,7 @@ Item.lantern = new Item({
   startRoom: Room.garage,
   useRoom: 'any',
   action() {
-    Room.basement.desc = 'It is still dark but you can make out some details.  There is a hole in the wall to the west.';
+    Room.basement.desc = 'It is still dark but you can make out some details.  There is a hole in the wall to the west and a spiral staircase leading up.';
     Room.basement.w = Room.shelter;
     Room.shelter.e = Room.basement;
     return 'You light the lantern.  A warm light fills the room.';
