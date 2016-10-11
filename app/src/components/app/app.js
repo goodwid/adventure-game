@@ -3,7 +3,14 @@ import style from './app.scss';
 
 export default {
   template,
-  controller() {
-    this.style = style;
-  },
+  controller
 };
+
+controller.$inject = ['$document'];
+
+function controller ($document) {
+  this.style = style;
+  this.focusCliInput = () => {
+    $document.find('input')[0].focus();
+  }
+}

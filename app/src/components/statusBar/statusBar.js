@@ -9,5 +9,6 @@ export default {
   },
   controller() {
     this.style = style;
+    console.log(this.inventory);
   },
 };

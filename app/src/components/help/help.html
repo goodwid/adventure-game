@@ -10,7 +10,7 @@
       <div class="modal-body">
         <h3>Usage</h3>
         <dl class="dl-horizontal dl--help">
-          <dt ng-repeat-start="(cmdKey, cmdDescription) in help">{{cmdKey}}</dt>
+          <dt ng-repeat-start="(cmdKey, cmdDescription) in $ctrl.help">{{cmdKey}}</dt>
           <dd ng-repeat-end>{{cmdDescription}}</dd>
         </dl>
       </div>
