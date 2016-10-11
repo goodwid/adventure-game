@@ -1,0 +1,23 @@
+<header>
+  <div class="container-fluid">
+    <h1 class="text-uppercase pull-left">Adventure Game</h1>
+    <button type="button" class="btn btn--glyphicon pull-right" data-toggle="modal" data-target="#modal-help">
+      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+<main>
+  <div class="container-fluid">
+    <ul class="list-unstyled">
+      <li ng-repeat="outputItem in $ctrl.outputList">
+        <span class="color--cyan" ng-if="outputItem.command">&gt;</span>
+        <span ng-bind-html="outputItem.text"></span>
+      </li>
+    </ul>
+    <div class="input-group input-group--cli">
+      <span class="input-group-addon input-group-addon--cli color--cyan" id="addon">&gt;&nbsp;</span>
+      <input type="text" class="form-control form-control--cli" id="input-cli" aria-describedby="addon" ng-keypress="$ctrl.addOutputItem($event)" ng-model="$ctrl.inputText">
+    </div>
+  </div>
+</main>
+<status-bar location="$ctrl.location" inventory="$ctrl.inventory"></status-bar>

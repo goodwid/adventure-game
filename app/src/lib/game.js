@@ -258,7 +258,7 @@ var user = {
     }
     response = result.text;
     if (this.location.trigger) response += this.location.trigger();
-    if (this.location.obj) this.location.obj.forEach(item => response += (`<br>There is a ${item.name} on the floor.`));
+    if (this.location.obj) this.location.obj.forEach(item => response += (`<br>There is a ${item.name} here.`));
     return response;
   }
 };

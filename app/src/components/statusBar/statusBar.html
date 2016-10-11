@@ -1,0 +1,21 @@
+<footer>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 color--green">
+        <small>
+          <b>Current Location</b>:
+          <span>{{$ctrl.location}}</span>
+        </small>
+      </div>
+      <div class="col-xs-12 col-sm-6 color--yellow">
+        <small ng-class="{'pull-left': inventory.length}">
+          <b>Items in Inventory</b>:
+          <span ng-if="$ctrl.inventory.length === 0">none</span>
+        </small>
+        <ul class="list--commas small" ng-if="inventory.length > 0">
+          <li class="pull-left" ng-repeat="item in $ctrl.inventory">{{item.name}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
